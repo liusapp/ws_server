@@ -104,7 +104,11 @@ function socketSrv(socket,data){
 	frameData.payloadData=[];
 	for(j=0;j<frameData.payloadLength;j++){
 		tmp=data[++i];
-		frameData.payloadData.push(tmp^frameData.maskingKey[j%4]);
+		/*有掩码*/
+		if(frameData.mask!=0)
+			frameData.payloadData.push(tmp^frameData.maskingKey[j%4]);
+		else
+			frameData.payloadData.push(tmp);
 	}
 	frameData.payloadData=new Buffer(frameData.payloadData);
 	//console.log(frameData);
