@@ -257,13 +257,11 @@ srv.on('upgrade', function(req, socket, head) {
 		"\r\n";
   socket.write(respStr);
   //console.log(respStr);
-  socket.setKeepAlive();
+  socket.setTimeout(0);
   socketArr.push(socket);
   socket.on("data",function(data){
 	  socketSrv(this,data);
   });
-  
-  //socket.pipe(socket); // echo back
 });
 srv.listen(80);
 console.log("server is runing !");
